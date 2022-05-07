@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Панель управления FinUp</title>
+    <title>{{ title }}</title>
 
     <link href="{{ url_for('static',filename='styles/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static',filename='styles/datepicker3.css') }}" rel="stylesheet">
@@ -105,15 +105,25 @@
                 <use xlink:href="#stroked-star"></use>
             </svg>
             Icons</a></li>
-        <li><a href="/categories">
+        <li><a href="/charts">
+            <svg class="glyph stroked line-graph">
+                <use xlink:href="#stroked-line-graph"></use>
+            </svg>
+            Аналитика</a></li>
+        <li><a href="/bank_accounts">
             <svg class="glyph stroked star">
                 <use xlink:href="#stroked-star"></use>
+            </svg>
+            Счета</a></li>
+        <li><a href="/categories">
+            <svg class="glyph stroked clipboard with paper">
+                <use xlink:href="#stroked-clipboard-with-paper"/>
             </svg>
             Категории</a></li>
         <li class="parent ">
             <a href="#">
                 <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use
-                        xlink:href="#stroked-chevron-down"></use></svg></span> Добавить
+                        xlink:href="#stroked-chevron-down"></use></svg>Добавить/Изменить</span>
             </a>
             <ul class="children collapse in" id="sub-item-1">
                 <li><a href="/income">
@@ -126,6 +136,11 @@
                             <use xlink:href="#stroked-chevron-right"></use>
                         </svg>
                     Расход</a></li>
+                <li><a href="/bank_account">
+                    <svg class="glyph stroked chevron-right">
+                            <use xlink:href="#stroked-chevron-right"></use>
+                        </svg>
+                    Счет</a></li>
                 <li><a href="/income_category">
                     <svg class="glyph stroked chevron-right">
                             <use xlink:href="#stroked-chevron-right"></use>
@@ -139,11 +154,16 @@
             </ul>
         </li>
         <li role="presentation" class="divider"></li>
-        <li><a href="login.html">
-            <svg class="glyph stroked male-user">
-                <use xlink:href="#stroked-male-user"></use>
+        <li><a href="/export_xlsx" download>
+            <svg class="glyph stroked download">
+                <use xlink:href="#stroked-download"/>
             </svg>
-            Login Page</a></li>
+            Экспорт данных в xlsx</a></li>
+        <li><a href="/export_csv">
+            <svg class="glyph stroked download">
+                <use xlink:href="#stroked-download"/>
+            </svg>
+            Экспорт данных в csv (zip)</a></li>
     </ul>
 
 </div><!--/.sidebar-->
