@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, Email
 from wtforms.validators import DataRequired
 from flask import Flask, url_for, render_template, redirect, make_response
 from csv_xlsx import *
+from grafs import graph
 
 from main import *
 import json
@@ -359,6 +360,41 @@ def bank_account():
             return redirect('/index')
     params = generate_params("Добавить", form=form)
     return render_template('bank_account.html', **params)
+
+
+class Analytics(FlaskForm):
+    mode = SelectField('Режим', validators=[DataRequired()], choices=['Доходам', 'Расходам'])
+    date_start = StringField('От', validators=[DataRequired()])
+    date_end = StringField('До', validators=[DataRequired()])
+    submit1 = SubmitField('', id='first')
+    submit2 = SubmitField('', id='second')
+    submit3 = SubmitField('', id='third')
+    submit4 = SubmitField('', id='forth')
+
+
+@app.route('/analytics', methods=['GET', 'POST'])
+def analytics():
+    with open(session_file, "r") as f:
+        if f.read() == '':
+            return redirect('/login')
+
+    form = Analytics()
+    if form.validate_on_submit():
+        if form.data['submit1']:
+            mode = "plot"
+        elif form.data['submit2']:
+            mode = 'pie'
+        elif form.data['submit3']:
+            mode = 'bar'
+        else:
+            mode = 'bar2'
+        type = False if form.mode.data == "Доходам" else True
+        graph(type, mode, form.date_start.data, form.date_end.data)
+        image = "static/images/saved_figure.png"
+        params = generate_params("Аналитика", form=form, image=image)
+        return render_template('analytics.html', **params)
+    params = generate_params("Аналитика", form=form)
+    return render_template('analytics.html', **params)
 
 
 @app.route('/export_xlsx')

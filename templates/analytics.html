@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                <svg class="glyph stroked home">
+                    <use xlink:href="#stroked-home"></use>
+                </svg>
+            </a></li>
+            <li class="active">{{ title }}</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ title }}</h1>
+        </div>
+    </div><!--/.row-->
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Построить график</div>
+                <div class="panel-body">
+                    <form role="form" method="post" novalidate>
+                        <div>
+                            {{ form.csrf_token }}
+                        </div>
+                        <div class="form-group">
+                            <label>По</label>
+                            {{ form.mode(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            <label>От</label>
+                            {{ form.date_start(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            <label>До</label>
+                           {{ form.date_end(class="form-control") }}
+                        </div>
+                        <style>
+                            .my {
+                                height: 90px;
+                                width: 90px;
+                                background-color: white;
+                                border: 0;
+                                border-radius: 0;
+                                background-size: 90px;
+                                color: transparent !important;
+                            }
+                        </style>
+                        <div>
+                            <div class="col-xs-12 col-md-6 col-lg-3" style="text-align: center;">{{ form.submit1(type="submit", value="first", class="btn btn-primary my", style='background-image: url("static/images/stacks.png")' ) }}</div>
+                            <div class="col-xs-12 col-md-6 col-lg-3" style="text-align: center;">{{ form.submit2(type="submit", value="second", class="btn btn-primary my", style='background-image: url("static/images/pie.png")' ) }}</div>
+                            <div class="col-xs-12 col-md-6 col-lg-3" style="text-align: center;">{{ form.submit3(type="submit", value="third", class="btn btn-primary my", style='background-image: url("static/images/columns.png")' ) }}</div>
+                            <div class="col-xs-12 col-md-6 col-lg-3" style="text-align: center;">{{ form.submit4(type="submit", value="forth", class="btn btn-primary my", style='background-image: url("static/images/lines.png")' ) }}</div>
+                        </div>
+                        <div class="form-group">
+                            <img src="{{ image }}">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.col-->
+    </div><!-- /.row -->
+
+
+    <script>
+		!function ($) {
+			$(document).on("click","ul.nav li.parent > a > span.icon", function(){
+				$(this).find('em:first').toggleClass("glyphicon-minus");
+			});
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+
+    </script>
+</div>
+    {% endblock %}

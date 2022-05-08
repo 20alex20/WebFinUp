@@ -70,7 +70,7 @@ def f2(type: bool, time_mode: int, args):
 def graph(type: bool, mode: str, one: str, two: str):  # year_start, month_start, day_start, year_stop, month_stop, day_stop
     time_mode = one.count(".") + 1
     args = [int(i) for i in one.split('.')[::-1] + two.split('.')[::-1]]
-    fig, ax = plt.subplots(figsize=(5, 2.7))
+    fig, ax = plt.subplots(figsize=(5, 3))
     if mode == "plot":
         cs, labels = f2(type, time_mode, args)
         for category, sums in cs.items():
@@ -118,6 +118,7 @@ def graph(type: bool, mode: str, one: str, two: str):  # year_start, month_start
         plt.xticks(ind, labels, rotation='horizontal')
         ax.legend()
 
-    bi = BytesIO()
-    plt.savefig(bi, format="png")
-    return bi.getvalue()
+    plt.savefig('static/images/saved_figure.png', dpi=200)
+    # bi = BytesIO()
+    # plt.savefig(bi, format="png")
+    # return bi.getvalue()
