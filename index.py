@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, Email
 from wtforms.validators import DataRequired
 from flask import Flask, url_for, render_template, redirect, make_response
 from csv_xlsx import *
-from grafs import graph
+from grafs import charts
 
 from main import *
 import json
@@ -11,7 +11,7 @@ import json
 # from input_user_data_form import UserDataForm
 # @app.route('/<style>.css')
 # def css(style):
-#     return open(f'static/styles/{style}.css').read()
+#     return open('.' + url_for('static', filename='styles/{style}.css')).read()
 
 
 # @app.route('/<image>.png')
@@ -114,14 +114,15 @@ def index():
     data = []
     for i in get_get():
         d = {
-            "number": i[4],
+            "number": i[5],
+            "comment": i[4],
             "name_category": i[0],
             "name_bank_account": i[1],
             "sum": i[2],
             "date": i[3]
         }
         data.append(d)
-    with open('static/tables/data.json', 'w+') as file:
+    with open('.' + url_for('static', filename='tables/data.json'), 'w+') as file:
         json.dump(data, file, sort_keys=True, indent=4)
 
     summa = get_sum()
@@ -235,10 +236,11 @@ def bank_accounts():
     for i in get_bank_accounts():
         d = {
             "name": i[1],
-            "sum": str(i[2])
+            "sum": str(i[2]),
+            "description": i[3]
         }
         data.append(d)
-    with open('static/tables/data1.json', 'w+') as file:
+    with open('.' + url_for('static', filename='tables/data1.json'), 'w+') as file:
         json.dump(data, file, indent=4)
 
     params = generate_params("Счета")
@@ -255,16 +257,18 @@ def categories():
     for i in get_categories():
         d = {
             "name": i[1],
-            "of": "Расходов"
+            "of": "Расходов",
+            "description": i[2]
         }
         data.append(d)
     for i in get_deposit_categories():
         d = {
             "name": i[1],
-            "of": "Доходов"
+            "of": "Доходов",
+            "description": i[2]
         }
         data.append(d)
-    with open('static/tables/data2.json', 'w+') as file:
+    with open('.' + url_for('static', filename='tables/data2.json'), 'w+') as file:
         json.dump(data, file, indent=4)
 
     params = generate_params("Категории")
@@ -381,16 +385,16 @@ def analytics():
     form = Analytics()
     if form.validate_on_submit():
         if form.data['submit1']:
-            mode = "plot"
+            mode = 'bar2'
         elif form.data['submit2']:
             mode = 'pie'
         elif form.data['submit3']:
             mode = 'bar'
         else:
-            mode = 'bar2'
+            mode = "plot"
         type = False if form.mode.data == "Доходам" else True
-        graph(type, mode, form.date_start.data, form.date_end.data)
-        image = "static/images/saved_figure.png"
+        charts(type, mode, form.date_start.data, form.date_end.data)
+        image = url_for('static', filename='images/saved_figure.png')
         params = generate_params("Аналитика", form=form, image=image)
         return render_template('analytics.html', **params)
     params = generate_params("Аналитика", form=form)
@@ -400,13 +404,13 @@ def analytics():
 @app.route('/export_xlsx')
 def export_xlsx_():
     export_xlsx()
-    return redirect('/static/export/export_data_FinUp.xlsx')
+    return redirect(url_for('static', filename='export/export_data_FinUp.xlsx'))
 
 
 @app.route('/export_csv')
 def export_csv_():
     export_csv()
-    return redirect('/static/export/export_data_FinUp.zip')
+    return redirect(url_for('static', filename='export/export_data_FinUp.zip'))
 
 
 @app.errorhandler(404)

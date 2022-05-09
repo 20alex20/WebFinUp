@@ -11,7 +11,7 @@
                     <use xlink:href="#stroked-home"></use>
                 </svg>
             </a></li>
-            <li class="active">Icons</li>
+            <li class="active">{{ title }}</li>
         </ol>
     </div><!--/.row-->
 
@@ -103,6 +103,7 @@
                             <th data-field="name_bank_account" data-sortable="true">Название счёта</th>
                             <th data-field="date" data-sortable="false">Дата</th>
                             <th data-field="sum" data-sortable="true">Сумма</th>
+                            <th data-field="comment" data-sortable="true">Комментарий</th>
                         </tr>
                         </thead>
                     </table>
@@ -394,7 +395,7 @@
     </div><!--/.row-->
 </div>    <!--/.main-->
 
-<script src="static/scripts/bootstrap-table.js"></script>
+<script src="{{ url_for('static',filename='scripts/bootstrap-table.js') }}"></script>
 <script>
 		$('#calendar').datepicker({
 		});

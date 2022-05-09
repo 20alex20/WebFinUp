@@ -1,184 +1,218 @@
 [
     {
+        "comment": "\u0432 \u0430\u043f ",
+        "date": "09.05.2022",
+        "name_bank_account": "card",
+        "name_category": "\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440",
+        "number": 0,
+        "sum": 6795
+    },
+    {
+        "comment": "hjk",
         "date": "06.05.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
-        "number": 0,
+        "number": 1,
         "sum": 50000
     },
     {
+        "comment": "dfsb refbvjubdsw vrkjsg",
         "date": "06.05.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
-        "number": 1,
+        "number": 2,
         "sum": 9
     },
     {
+        "comment": 78,
         "date": "30.04.2022",
-        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
-        "number": 2,
-        "sum": 40
-    },
-    {
-        "date": "28.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 3,
-        "sum": 120
+        "sum": 4000
     },
     {
-        "date": "14.4.2022",
+        "comment": 78,
+        "date": "30.04.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
+        "name_category": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
         "number": 4,
-        "sum": 333
+        "sum": 40
     },
     {
-        "date": "14.4.2022",
+        "comment": 78,
+        "date": "30.04.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
+        "name_category": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
         "number": 5,
-        "sum": 333
+        "sum": 3445
     },
     {
-        "date": "14.4.2022",
+        "comment": 78,
+        "date": "30.04.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
+        "name_category": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
         "number": 6,
-        "sum": 333
+        "sum": 40
     },
     {
-        "date": "8.4.2022",
+        "comment": "weqweqwe",
+        "date": "28.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 7,
-        "sum": 300
+        "sum": 120
     },
     {
-        "date": "8.4.2022",
+        "comment": 78,
+        "date": "19.04.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
+        "name_category": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
         "number": 8,
-        "sum": 300
+        "sum": 40
     },
     {
-        "date": "8.4.2022",
+        "comment": "dfgdsfg",
+        "date": "14.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 9,
-        "sum": 300
+        "sum": 333
     },
     {
-        "date": "8.4.2022",
+        "comment": "dfgdsfg",
+        "date": "14.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 10,
-        "sum": 300
+        "sum": 333
     },
     {
-        "date": "8.4.2022",
+        "comment": "dfgdsfg",
+        "date": "14.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 11,
-        "sum": 300
+        "sum": 333
     },
     {
-        "date": "7.4.2022",
+        "comment": "yyyy",
+        "date": "8.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 12,
-        "sum": 400
+        "sum": 300
     },
     {
-        "date": "7.4.2022",
+        "comment": "yyyy",
+        "date": "8.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 13,
-        "sum": 400
+        "sum": 300
     },
     {
-        "date": "6.4.2022",
+        "comment": "yyyy",
+        "date": "8.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 14,
-        "sum": 1233
+        "sum": 300
     },
     {
-        "date": "6.4.2022",
+        "comment": "yyyy",
+        "date": "8.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 15,
         "sum": 300
     },
     {
-        "date": "6.4.2022",
+        "comment": "yyyy",
+        "date": "8.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 16,
         "sum": 300
     },
     {
-        "date": "5.4.2022",
+        "comment": "rewqeqwe",
+        "date": "7.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 17,
-        "sum": 222
+        "sum": 400
     },
     {
-        "date": "3.4.2022",
+        "comment": "rewqeqwe",
+        "date": "7.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 18,
-        "sum": 585
+        "sum": 400
     },
     {
-        "date": "2.4.2022",
+        "comment": 12342134,
+        "date": "6.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 19,
-        "sum": 666
+        "sum": 1233
     },
     {
-        "date": "1.4.2022",
+        "comment": "dfghdfgh",
+        "date": "6.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 20,
-        "sum": 1500
+        "sum": 300
     },
     {
-        "date": "1.11.2021",
+        "comment": "dfghdfgh",
+        "date": "6.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 21,
-        "sum": 200
+        "sum": 300
     },
     {
-        "date": "2022.04.30",
+        "comment": "y tgf",
+        "date": "5.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 22,
-        "sum": 4000
+        "sum": 222
     },
     {
-        "date": "2022.04.30",
+        "comment": "tttt",
+        "date": "3.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
+        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 23,
-        "sum": 40
+        "sum": 585
     },
     {
-        "date": "2022.04.30",
+        "comment": "ryikj",
+        "date": "2.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
+        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 24,
-        "sum": 3445
+        "sum": 666
     },
     {
-        "date": "2022.04.19",
+        "comment": "qweqwe",
+        "date": "1.4.2022",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
+        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
         "number": 25,
-        "sum": 40
+        "sum": 1500
+    },
+    {
+        "comment": "fhjh",
+        "date": "1.11.2021",
+        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
+        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
+        "number": 26,
+        "sum": 200
     }
 ]

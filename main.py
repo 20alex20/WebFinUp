@@ -415,9 +415,9 @@ def get_bank_acc_name(id_bank_account):
 def get_get():
     ans = []
     for i in get_deposits():
-        ans.append([get_deposit_category_name(i[1]), get_bank_acc_name(i[2]), i[3], i[4]])
+        ans.append([get_deposit_category_name(i[1]), get_bank_acc_name(i[2]), i[3], i[4], i[5]])
     for i in get_purchase():
-        ans.append([get_category_name(i[1]), get_bank_acc_name(i[2]), i[3], i[4]])
+        ans.append([get_category_name(i[1]), get_bank_acc_name(i[2]), i[3], i[4], i[5]])
     ans = sorted(ans, key=lambda x: [int(i) for i in x[3].split('.')[::-1]], reverse=True)
     for i in range(len(ans)):
         ans[i].append(i)

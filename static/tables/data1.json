@@ -1,18 +1,22 @@
 [
     {
         "name": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "sum": "50466"
+        "sum": "50466",
+        "description": ""
     },
     {
         "name": "card",
-        "sum": "0"
+        "sum": "6795",
+        "description": ""
     },
     {
         "name": "megacard",
-        "sum": "0"
+        "sum": "0",
+        "description": ""
     },
     {
         "name": "tghfghfg",
-        "sum": "0"
+        "sum": "0",
+        "description": ""
     }
 ]
