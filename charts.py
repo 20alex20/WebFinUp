@@ -3,7 +3,7 @@ import matplotlib
 # import datetime as dt
 from datetime import date, timedelta
 import numpy as np
-from main import *
+from sql import *
 from io import BytesIO
 
 

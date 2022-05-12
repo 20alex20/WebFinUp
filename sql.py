@@ -379,13 +379,6 @@ def get_sum_purchases():
     return str(sum) + ' ₽'
 
 
-def calc_inf(sum, percent, num_month):
-    sum = sum[:-1]
-    sum = int(sum)
-    num = int(sum / (1 + int(percent) / 100 / 12 * num_month))
-    return str(num) + ' ₽'
-
-
 def get_category_name(id_category):
     id_category = int(id_category)
     return get_data(format(get_category_name_by_id, id_category))[0][0]

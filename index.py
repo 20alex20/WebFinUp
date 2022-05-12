@@ -3,10 +3,10 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, Email
     DateField
 from wtforms.validators import DataRequired
 from flask import Flask, url_for, render_template, redirect, make_response, request
+
 from csv_xlsx import *
 from charts import charts
-
-from main import *
+from sql import *
 
 import json
 
@@ -49,7 +49,7 @@ app.config['SECRET_KEY'] = 'WebFinUp'
 alert = Alert()
 
 
-class LoginForm(FlaskForm):
+class Login(FlaskForm):
     email = EmailField('Почта', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     remember_me = BooleanField('Запомнить меня')
@@ -58,7 +58,7 @@ class LoginForm(FlaskForm):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_web():
-    form = LoginForm()
+    form = Login()
     if form.validate_on_submit():
         answer = login(form.email.data, form.password.data)
         if answer == "Неверный логин или пароль":
@@ -109,7 +109,7 @@ def register_web():
 
 
 @app.route('/logout')
-def logout_():
+def logout_web():
     resp = make_response(redirect('/login'))
     if not (am_i_not_login()):
         resp.set_cookie('id_user', 'null')
@@ -311,7 +311,7 @@ class ExpensesCategory(FlaskForm):
         super().__init__()
         self.categories_data = [(str(i[0]), i[1]) for i in get_categories()]
         self.categories_data.insert(0, ('-1', 'Новая категория'))
-        self.categories.choices = [i[1] for i in self.categories]
+        self.categories.choices = [i[1] for i in self.categories_data]
 
 
 @app.route('/expenses_category', methods=['GET', 'POST'])
@@ -403,13 +403,13 @@ def analytics():
 
 
 @app.route('/export_xlsx')
-def export_xlsx_():
+def export_xlsx_web():
     export_xlsx()
     return redirect(url_for('static', filename='export/export_data_FinUp.xlsx'))
 
 
 @app.route('/export_csv')
-def export_csv_():
+def export_csv_web():
     export_csv()
     return redirect(url_for('static', filename='export/export_data_FinUp.zip'))
 

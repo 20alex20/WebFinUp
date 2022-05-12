@@ -1,5 +1,5 @@
 import xlsxwriter
-from main import get_all_data
+from sql import get_all_data
 from zipfile import ZipFile
 
 headers2 = {
