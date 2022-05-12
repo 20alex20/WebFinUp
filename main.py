@@ -2,9 +2,6 @@ import sqlite3
 from datetime import datetime as dt
 from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
-from os import environ
-import shutil
-from os.path import dirname, exists
 
 session_file = "session_files/id_user.txt"
 
@@ -17,25 +14,24 @@ def format(string, *args):
     return string
 
 
+request_cookies = {'id_user': 0, 'full_name': None, 'email': None}
+
+
+def write_request_cookies(object):
+    global request_cookies
+    request_cookies = object
+
+
 def get_id_user():
-    with open(session_file, "r") as f:
-        return int(f.read().split('.')[0])
+    return int(request_cookies.get('id_user'))
 
 
 def get_full_name():
-    with open(session_file, "r") as f:
-        return f.read().split('.')[2]
+    return request_cookies.get('full_name')
 
 
 def get_username_email():
-    with open(session_file, "r") as f:
-        return f.read().split('.')[1]
-
-
-def write_all(first, second, third):
-    first = str(first)
-    with open(session_file, "w+") as f:
-        f.write(first + '.' + second + '.' + third)
+    return request_cookies.get('email')
 
 
 register_query = 'INSERT INTO users(username_email, password_hash, full_name) ' \
@@ -161,23 +157,22 @@ def login(username_email, password):
     if ans and check_password_hash(ans[0][1], password):
         id_user = ans[0][0]
         full_name = ans[0][2]
-        write_all(id_user, username_email, full_name)
-        return f"Здравствуйте, {full_name}!"
+        return id_user, username_email, full_name
     return "Неверный логин или пароль"
 
 
 default = ["Автомобиль", "Отдых и развлечения", "Продукты", "Кафе и растораны", "Одежда",
            "Здоровье и фитнес", "Подарки", "Поездки"]
 default1 = ["Зарплата", "Аренда", "Родственники"]
+
+
 def register(username_email, password, full_name):
-    # shutil.copy(dirname(__file__) + "/db.sqlite3", environ["HOME"] + "/")
-    # return 'ok'
     ans = get_data(format(is_there_username_email, username_email))
     if ans:
         return "Аккаунт на эту почту уже зарегистрирован"
     do_query(format(register_query, username_email, generate_password_hash(password), full_name))
     message = login(username_email, password)
-    if message == "Вход разрешен":
+    if message != "Неверный логин или пароль":
         for i in default:
             add_category(i, "")
         for j in default1:
@@ -195,15 +190,9 @@ def edit_about_me(username_email, full_name):
     return "Данные изменены"
 
 
-def logout():
-    with open(session_file, 'w') as f:
-        f.write("")
-    return "До свидания"
-
-
 def delete_my_account():
     do_query(format(delete_my_account_query, get_id_user()))
-    logout()
+    # logout()
     return "Аккаунт удалён успешно"
 
 
@@ -412,7 +401,7 @@ def get_bank_acc_name(id_bank_account):
     return get_data(format(get_bank_acc_name_by_id, id_bank_account))[0][0]
 
 
-def get_get():
+def get_all():
     ans = []
     for i in get_deposits():
         ans.append([get_deposit_category_name(i[1]), get_bank_acc_name(i[2]), i[3], i[4], i[5]])

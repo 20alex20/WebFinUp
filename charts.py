@@ -67,7 +67,8 @@ def charts_by_date(type: bool, time_mode: int, args):
     return cs, labels
 
 
-def charts(type: bool, mode: str, one: str, two: str):  # year_start, month_start, day_start, year_stop, month_stop, day_stop
+def charts(type: bool, mode: str, one: str,
+           two: str):  # year_start, month_start, day_start, year_stop, month_stop, day_stop
     time_mode = one.count(".") + 1
     args = [int(i) for i in one.split('.')[::-1] + two.split('.')[::-1]]
     fig, ax = plt.subplots(figsize=(6, 4))
@@ -99,7 +100,6 @@ def charts(type: bool, mode: str, one: str, two: str):  # year_start, month_star
         ax.set_ylabel('Рубли')
         plt.xticks(x, labels, rotation='horizontal')
         ax.set_title(f'Cуммы по категориям {"расходов" if type else "доходов"}')
-        # ax.bar_label(rects2, padding=3)
     elif mode == 'bar2':
         cs, labels = charts_by_date(type, time_mode, args)
         ind = np.arange(len(tuple(cs.values())[0]))
@@ -107,18 +107,13 @@ def charts(type: bool, mode: str, one: str, two: str):  # year_start, month_star
         last = None
         for category, sums in cs.items():
             ax.bar(ind, sums, width, bottom=last, label=category)
-            # ax.bar_label(p, label_type='center')
             last = sums
 
         ax.axhline(0, color='grey', linewidth=0.8)
         ax.set_ylabel('Рубли')
         ax.set_xlabel('Дата')
         ax.set_title(f'{"Расходы" if type else "Доходы"} за выбранный период')
-        # ax.set_xticks(ind, labels=labels)
         plt.xticks(ind, labels, rotation='horizontal')
         ax.legend()
 
     plt.savefig('static/images/saved_figure.png', dpi=200)
-    # bi = BytesIO()
-    # plt.savefig(bi, format="png")
-    # return bi.getvalue()

@@ -1,7 +1,5 @@
-import csv
 import xlsxwriter
 from main import get_all_data
-from main import environ
 from zipfile import ZipFile
 
 headers2 = {
@@ -9,19 +7,9 @@ headers2 = {
     "deposit_categories": ("id_deposit_category", "name", "description"),
     "purchases": ("id_purchase", "id_category", "id_bank_account", "sum", "date", "comment"),
     "bank_accounts": ("id_bank_account", "name", "current_sum", "description"),
-    "deposits":  ("id_deposit", "id_category", "id_bank_account", "sum", "date", "comment"),
+    "deposits": ("id_deposit", "id_category", "id_bank_account", "sum", "date", "comment"),
 }
 d = 'static/export'
-
-
-def export_csv_2():
-    for name, cur_list in zip(sorted(headers2), get_all_data()):
-        headers = headers2[name]
-        with open(d + f'/export_data_FinUp_{name}.csv', 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(headers)
-            writer.writerows(cur_list)
-    return "Осуществлен экспорт"
 
 
 def export_xlsx():
