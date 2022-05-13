@@ -3,11 +3,11 @@ from sql import get_all_data
 from zipfile import ZipFile
 
 headers2 = {
-    "categories": ("id_category", "name", "description"),
-    "deposit_categories": ("id_deposit_category", "name", "description"),
-    "purchases": ("id_purchase", "id_category", "id_bank_account", "sum", "date", "comment"),
+    "incomes_categories": ("id_incomes_category", "name", "description"),
+    "expenses_categories": ("id_expenses_category", "name", "description"),
     "bank_accounts": ("id_bank_account", "name", "current_sum", "description"),
-    "deposits": ("id_deposit", "id_category", "id_bank_account", "sum", "date", "comment"),
+    "incomes": ("id_income", "id_incomes_categories", "id_bank_account", "sum", "date", "comment"),
+    "expenses": ("id_expense", "id_expenses_category", "id_bank_account", "sum", "date", "comment")
 }
 d = 'static/export'
 

@@ -28,8 +28,7 @@ class Alert:
 
 def am_i_not_login():
     flag = 'id_user' not in request.cookies or request.cookies['id_user'] == 'null'
-    if get_full_name() is None:
-        write_request_cookies(request.cookies)
+    write_request_cookies(request.cookies)
     return flag
 
 
@@ -115,6 +114,7 @@ def logout_web():
         resp.set_cookie('id_user', 'null')
         resp.set_cookie('email', 'null')
         resp.set_cookie('full_name', 'null')
+        write_request_cookies({'id_user': 'null', 'full_name': 'null', 'email': 'null'})
         return resp
     return redirect('/login')
 
@@ -173,7 +173,7 @@ def income():
             if i[1] == form.categories.data:
                 category = i[0]
         for i in form.bank_accounts_data:
-            if i[1] == form.bank_accounts.data.split()[0]:
+            if i[1] == ' '.join(form.bank_accounts.data.split(' ')[:-1]):
                 bank_account = i[0]
         alert.put(
             add_deposit(category, bank_account, form.sum.data, form.date.data.strftime("%d.%m.%Y"),
@@ -211,7 +211,7 @@ def expense():
             if i[1] == form.categories.data:
                 category = i[0]
         for i in form.bank_accounts_data:
-            if i[1] == form.bank_accounts.data.split()[0]:
+            if i[1] == ' '.join(form.bank_accounts.data.split(' ')[:-1]):
                 bank_account = i[0]
         alert.put(add_purchase(category, bank_account, form.sum.data,
                                form.date.data.strftime("%d.%m.%Y"), form.comment.data))
@@ -343,7 +343,7 @@ class BankAccounts(FlaskForm):
 
     def __init__(self):
         super().__init__()
-        self.bank_accounts_data = [(str(i[0]), i[1]) for i in get_categories()]
+        self.bank_accounts_data = [(str(i[0]), i[1]) for i in get_bank_accounts()]
         self.bank_accounts_data.insert(0, ('-1', 'Новый счет'))
         self.bank_accounts.choices = [i[1] for i in self.bank_accounts_data]
 
@@ -356,12 +356,12 @@ def bank_account():
     form = BankAccounts()
     if form.validate_on_submit():
         if form.bank_accounts.data == 'Новый счет':
-            alert.put(add_category(form.name.data, form.comment.data))
+            alert.put(add_bank_account(form.name.data, form.sum.data, form.comment.data))
         else:
             for i in form.bank_accounts_data:
                 if i[1] == form.bank_accounts.data:
                     bank_account = i[0]
-            alert.put(edit_category(bank_account, form.name.data, form.comment.data))
+            alert.put(edit_bank_account(bank_account, form.name.data, form.sum.data, form.comment.data))
         if alert.read() == "Данные изменены":
             return redirect('/')
     params = generate_params("Добавить", form=form)
@@ -404,12 +404,16 @@ def analytics():
 
 @app.route('/export_xlsx')
 def export_xlsx_web():
+    if am_i_not_login():
+        return redirect('/login')
     export_xlsx()
     return redirect(url_for('static', filename='export/export_data_FinUp.xlsx'))
 
 
 @app.route('/export_csv')
 def export_csv_web():
+    if am_i_not_login():
+        return redirect('/login')
     export_csv()
     return redirect(url_for('static', filename='export/export_data_FinUp.zip'))
 
@@ -420,4 +424,4 @@ def web404(error):
 
 
 if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
+    app.run(port=8080, host='0.0.0.0')

@@ -83,7 +83,8 @@ get_bank_accounts_query = 'SELECT id_bank_account, name, current_sum, descriptio
 is_there_bank_account = 'SELECT id_bank_account FROM bank_accounts WHERE name="{name}", id_user={id_user}'
 get_current_sum_query = 'SELECT current_sum FROM bank_accounts WHERE id_bank_account={id_bank_account}'
 edit_sum_query = 'UPDATE bank_accounts SET current_sum={current_sum} WHERE id_bank_account={id_bank_account}'
-edit_bank_account_query = "UPDATE bank_accounts SET name='{name}', description='{description}' WHERE id_bank_account={id_bank_account}"
+edit_bank_account_query = "UPDATE bank_accounts SET name='{name}', current_sum={sum}, description='{description}' " \
+                          "WHERE id_bank_account={id_bank_account}"
 delete_bank_account_query = 'DELETE FROM bank_accounts WHERE id_bank_account={id_bank_account}'
 
 add_deposit_query = 'INSERT INTO deposits(date_time_add, id_deposit_category, id_bank_account, sum,' \
@@ -146,8 +147,8 @@ def to_line_list(arr, cut=None):
 def get_all_data():
     ans = []
     id_user = get_id_user()
-    for i in [get_bank_accounts_query, get_categories_query, get_deposit_categories_query,
-              get_deposits_query, get_purchases_query]:
+    for i in [get_bank_accounts_query, get_purchases_query,
+              get_categories_query, get_deposits_query, get_deposit_categories_query]:
         ans.append(get_data(format(i, id_user)))
     return ans
 
@@ -173,6 +174,7 @@ def register(username_email, password, full_name):
     do_query(format(register_query, username_email, generate_password_hash(password), full_name))
     message = login(username_email, password)
     if message != "Неверный логин или пароль":
+        write_request_cookies({'id_user': message[0], 'email': message[1], 'full_name': message[2]})
         for i in default:
             add_category(i, "")
         for j in default1:
@@ -286,6 +288,7 @@ def delete_purchase(id_purchase):
 def add_bank_account(name, current_sum, description=""):
     if search_category(name, get_bank_accounts()):
         return "Категория с таким названием уже существует"
+    print(format(add_bank_account_query, name, get_id_user(), current_sum, description))
     do_query(format(add_bank_account_query, name, get_id_user(), current_sum, description))
     return "Данные изменены"
 
@@ -294,12 +297,14 @@ def get_bank_accounts():
     return get_data(format(get_bank_accounts_query, get_id_user()))
 
 
-def edit_bank_account(id_bank_account, name, description=""):
+def edit_bank_account(id_bank_account, name, sum, description=""):
     ans = search_category(name, get_bank_accounts())
     if ans and ans != id_bank_account:
+        print(ans, id_bank_account)
         return "Счет с таким названием уже существует"
     # return format(edit_bank_account_query, name, description, id_bank_account)
-    do_query(format(edit_bank_account_query, name, description, id_bank_account))
+    print(format(edit_bank_account_query, name, sum, description, id_bank_account))
+    do_query(format(edit_bank_account_query, name, sum, description, id_bank_account))
     return "Данные изменены"
 
 
