@@ -1,10 +1,7 @@
 import matplotlib.pyplot as plt
-import matplotlib
-# import datetime as dt
 from datetime import date, timedelta
 import numpy as np
-from sql import *
-from io import BytesIO
+from app.logics.sql import *
 
 
 def charts_by_categories(type: bool, time_mode: int, args):
@@ -14,18 +11,16 @@ def charts_by_categories(type: bool, time_mode: int, args):
         categories = get_deposit_categories()
     labels = []
     sums = []
-    for id_category, name, description in categories:
+    for elem in categories:
         cursum = 0
         start = list(args[:time_mode]) + [1] * (3 - time_mode)
         end = list(args[time_mode:]) + [1] * (3 - time_mode)
         date_start = date(*start)
         date_stop = date(*end)
-        # date_start = dt.date(*(list(args[:time_mode]) + [1] * (3 - time_mode)))
-        # date_stop = dt.date(*(list(args[time_mode:]) + [1] * (3 - time_mode)))
-        for id_purchase, sum, date_get in get_purchase_deposit(type, id_category):
-            if date_start <= date(*map(int, date_get.split('.')[::-1])) < date_stop:
-                cursum += sum
-        labels.append(name)
+        for elem2 in get_purchase_deposit(type, elem):
+            if date_start <= date(*map(int, elem2.date.split('.')[::-1])) < date_stop:
+                cursum += elem2.sum
+        labels.append(elem.name)
         sums.append(cursum)
     return labels, sums
 
@@ -50,8 +45,8 @@ def charts_by_date(type: bool, time_mode: int, args):
         categories = get_categories()
     else:
         categories = get_deposit_categories()
-    for id_category, name, description in categories:
-        cs[name] = []
+    for elem in categories:
+        cs[elem.name] = []
 
     date_start = date(*(list(args[:len(args) // 2]) + [1] * (3 - time_mode)))
     date_next = plus_one(time_mode, date_start)
@@ -64,12 +59,28 @@ def charts_by_date(type: bool, time_mode: int, args):
             cs[label].append(sum)
         date_start = date_next
         date_next = plus_one(time_mode, date_start)
-    return cs, labels
+    if len(labels) <= 6:
+        return cs, labels
+    new_labels = []
+    n = (len(labels) - 1) / 5
+    q = 0.0
+    for i in range(0, len(labels)):
+        if i == round(q):
+            new_labels.append(labels[i])
+            q += n
+        else:
+            new_labels.append('')
+
+    return cs, new_labels
 
 
 def charts(type: bool, mode: str, one: str,
            two: str):  # year_start, month_start, day_start, year_stop, month_stop, day_stop
     time_mode = one.count(".") + 1
+    if time_mode == 1:
+        two = str(int(two) + 1)
+    else:
+        two = str(int(two.split('.')[0]) + 1) + two[two.index('.'):]
     args = [int(i) for i in one.split('.')[::-1] + two.split('.')[::-1]]
     fig, ax = plt.subplots(figsize=(6, 4))
     if mode == "plot":
@@ -84,6 +95,13 @@ def charts(type: bool, mode: str, one: str,
         ax.legend()
     elif mode == 'pie':
         labels, sums = charts_by_categories(type, time_mode, args)
+        i = 0
+        while i < len(labels):
+            if sums[i] == 0:
+                del sums[i]
+                del labels[i]
+            else:
+                i += 1
         colors = plt.get_cmap('Oranges')(np.linspace(0.2, 0.7, len(labels)))
         ax.pie(sums, colors=colors, radius=3, center=(4, 4), labels=labels, frame=True,
                wedgeprops={"linewidth": 1, "edgecolor": "white"}, autopct='%1.1f%%', shadow=True)
@@ -92,6 +110,13 @@ def charts(type: bool, mode: str, one: str,
         ax.axis('off')
     elif mode == 'bar':
         labels, sums = charts_by_categories(type, time_mode, args)
+        i = 0
+        while i < len(labels):
+            if sums[i] == 0:
+                del sums[i]
+                del labels[i]
+            else:
+                i += 1
         x = np.arange(len(labels))
         width = 0.35
         fig, ax = plt.subplots()
@@ -116,4 +141,4 @@ def charts(type: bool, mode: str, one: str,
         plt.xticks(ind, labels, rotation='horizontal')
         ax.legend()
 
-    plt.savefig('static/images/saved_figure.png', dpi=200)
+    plt.savefig('app/static/images/saved_figure.png', dpi=200)

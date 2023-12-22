@@ -1,14 +1,11 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField, SelectField, \
-    DateField
-from wtforms.validators import DataRequired
-from flask import Flask, url_for, render_template, redirect, make_response, request
+from flask import render_template, redirect, make_response, request
+import json
+
+from app import app
 
 from app.logics.csv_xlsx import *
 from app.logics.charts import charts
-from app.logics.sql import *
-
-import json
+from app.forms import *
 
 
 class Alert:
@@ -43,16 +40,7 @@ def generate_params(title, **kwargs):
     return params
 
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'WebFinUp'
 alert = Alert()
-
-
-class Login(FlaskForm):
-    email = EmailField('Почта', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    remember_me = BooleanField('Запомнить меня')
-    submit = SubmitField('Войти')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -75,14 +63,6 @@ def login_web():
             resp.set_cookie('full_name', answer[2], max_age)
             return resp
     return render_template('login.html', form=form, alert=alert.get())
-
-
-class Register(FlaskForm):
-    username = StringField('ФИО', validators=[DataRequired()])
-    email = EmailField('Почта', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    remember_me = BooleanField('Запомнить меня')
-    submit = SubmitField('Зарегистрироваться')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -136,7 +116,7 @@ def index():
             "date": i[3]
         }
         data.append(d)
-    with open('.' + url_for('static', filename='tables/data.json'), 'w+') as file:
+    with open('app' + url_for('static', filename='tables/data.json'), 'w+') as file:
         json.dump(data, file, sort_keys=True, indent=4)
 
     summa = get_sum()
@@ -146,22 +126,6 @@ def index():
     return render_template('index.html', **params)
 
 
-class Income(FlaskForm):
-    categories = SelectField('Категория', validators=[DataRequired()])
-    bank_accounts = SelectField('Счет', validators=[DataRequired()])
-    comment = StringField('Комментарий')
-    sum = StringField('Сумма', validators=[DataRequired()])
-    date = DateField('Дата', validators=[DataRequired()])
-    submit = SubmitField('Добавить')
-
-    def __init__(self):
-        super().__init__()
-        self.categories_data = [(str(i[0]), i[1]) for i in get_deposit_categories()]
-        self.categories.choices = [i[1] for i in self.categories_data]
-        self.bank_accounts_data = [(str(i[0]), i[1], str(i[2])) for i in get_bank_accounts()]
-        self.bank_accounts.choices = [i[1] + ' (' + i[2] + '₽)' for i in self.bank_accounts_data]
-
-
 @app.route('/income', methods=['GET', 'POST'])
 def income():
     if am_i_not_login():
@@ -169,9 +133,11 @@ def income():
 
     form = Income()
     if form.validate_on_submit():
+        category = 0
         for i in form.categories_data:
             if i[1] == form.categories.data:
                 category = i[0]
+        bank_account = 0
         for i in form.bank_accounts_data:
             if i[1] == ' '.join(form.bank_accounts.data.split(' ')[:-1]):
                 bank_account = i[0]
@@ -184,22 +150,6 @@ def income():
     return render_template('purchase.html', **params)
 
 
-class Expense(FlaskForm):
-    categories = SelectField('Категория', validators=[DataRequired()])
-    bank_accounts = SelectField('Счет', validators=[DataRequired()])
-    comment = StringField('Комментарий')
-    sum = StringField('Сумма', validators=[DataRequired()])
-    date = DateField('Дата', validators=[DataRequired()])
-    submit = SubmitField('Добавить')
-
-    def __init__(self):
-        super().__init__()
-        self.categories_data = [(str(i[0]), i[1]) for i in get_categories()]
-        self.categories.choices = [i[1] for i in self.categories_data]
-        self.bank_accounts_data = [(str(i[0]), i[1], str(i[2])) for i in get_bank_accounts()]
-        self.bank_accounts.choices = [i[1] + ' (' + i[2] + '₽)' for i in self.bank_accounts_data]
-
-
 @app.route('/expense', methods=['GET', 'POST'])
 def expense():
     if am_i_not_login():
@@ -207,9 +157,11 @@ def expense():
 
     form = Expense()
     if form.validate_on_submit():
+        category = 0
         for i in form.categories_data:
             if i[1] == form.categories.data:
                 category = i[0]
+        bank_account = 0
         for i in form.bank_accounts_data:
             if i[1] == ' '.join(form.bank_accounts.data.split(' ')[:-1]):
                 bank_account = i[0]
@@ -229,12 +181,12 @@ def bank_accounts():
     data = []
     for i in get_bank_accounts():
         d = {
-            "name": i[1],
-            "sum": str(i[2]),
-            "description": i[3]
+            "name": i.name,
+            "sum": str(i.current_sum),
+            "description": i.description
         }
         data.append(d)
-    with open('.' + url_for('static', filename='tables/data1.json'), 'w+') as file:
+    with open('app' + url_for('static', filename='tables/data1.json'), 'w+') as file:
         json.dump(data, file, indent=4)
 
     params = generate_params("Счета")
@@ -249,36 +201,23 @@ def categories():
     data = []
     for i in get_categories():
         d = {
-            "name": i[1],
+            "name": i.name,
             "of": "Расходов",
-            "description": i[2]
+            "description": i.description
         }
         data.append(d)
     for i in get_deposit_categories():
         d = {
-            "name": i[1],
+            "name": i.name,
             "of": "Доходов",
-            "description": i[2]
+            "description": i.description
         }
         data.append(d)
-    with open('.' + url_for('static', filename='tables/data2.json'), 'w+') as file:
+    with open('app' + url_for('static', filename='tables/data2.json'), 'w+') as file:
         json.dump(data, file, indent=4)
 
     params = generate_params("Категории")
     return render_template('categories.html', **params)
-
-
-class IncomeCategory(FlaskForm):
-    categories = SelectField('Категория', validators=[DataRequired()])
-    name = StringField('Название', validators=[DataRequired()])
-    comment = StringField('Описание')
-    submit = SubmitField('Добавить/Изменить')
-
-    def __init__(self):
-        super().__init__()
-        self.categories_data = [(str(i[0]), i[1]) for i in get_deposit_categories()]
-        self.categories_data.insert(0, ('-1', 'Новая категория'))
-        self.categories.choices = [i[1] for i in self.categories_data]
 
 
 @app.route('/income_category', methods=['GET', 'POST'])
@@ -291,6 +230,7 @@ def income_category():
         if form.categories.data == 'Новая категория':
             alert.put(add_deposit_category(form.name.data, form.comment.data))
         else:
+            category = 0
             for i in form.categories_data:
                 if i[1] == form.categories.data:
                     category = i[0]
@@ -299,19 +239,6 @@ def income_category():
             return redirect('/')
     params = generate_params("Добавить", name="Доход", form=form)
     return render_template('category.html', **params)
-
-
-class ExpensesCategory(FlaskForm):
-    categories = SelectField('Категория', validators=[DataRequired()])
-    name = StringField('Название', validators=[DataRequired()])
-    comment = StringField('Описание')
-    submit = SubmitField('Добавить/Изменить')
-
-    def __init__(self):
-        super().__init__()
-        self.categories_data = [(str(i[0]), i[1]) for i in get_categories()]
-        self.categories_data.insert(0, ('-1', 'Новая категория'))
-        self.categories.choices = [i[1] for i in self.categories_data]
 
 
 @app.route('/expenses_category', methods=['GET', 'POST'])
@@ -324,6 +251,7 @@ def expenses_category():
         if form.categories.data == 'Новая категория':
             alert.put(add_category(form.name.data, form.comment.data))
         else:
+            category = 0
             for i in form.categories_data:
                 if i[1] == form.categories.data:
                     category = i[0]
@@ -332,20 +260,6 @@ def expenses_category():
             return redirect('/')
     params = generate_params("Добавить", name="Расход", form=form)
     return render_template('category.html', **params)
-
-
-class BankAccounts(FlaskForm):
-    bank_accounts = SelectField('Счет', validators=[DataRequired()])
-    name = StringField('Название', validators=[DataRequired()])
-    sum = StringField('Сумма', validators=[DataRequired()], default='0')
-    comment = StringField('Описание')
-    submit = SubmitField('Добавить/Изменить')
-
-    def __init__(self):
-        super().__init__()
-        self.bank_accounts_data = [(str(i[0]), i[1]) for i in get_bank_accounts()]
-        self.bank_accounts_data.insert(0, ('-1', 'Новый счет'))
-        self.bank_accounts.choices = [i[1] for i in self.bank_accounts_data]
 
 
 @app.route('/bank_account', methods=['GET', 'POST'])
@@ -358,6 +272,7 @@ def bank_account():
         if form.bank_accounts.data == 'Новый счет':
             alert.put(add_bank_account(form.name.data, form.sum.data, form.comment.data))
         else:
+            bank_account = 0
             for i in form.bank_accounts_data:
                 if i[1] == form.bank_accounts.data:
                     bank_account = i[0]
@@ -366,16 +281,6 @@ def bank_account():
             return redirect('/')
     params = generate_params("Добавить", form=form)
     return render_template('bank_account.html', **params)
-
-
-class Analytics(FlaskForm):
-    mode = SelectField('Режим', validators=[DataRequired()], choices=['Доходам', 'Расходам'])
-    date_start = StringField('От', validators=[DataRequired()])
-    date_end = StringField('До', validators=[DataRequired()])
-    submit1 = SubmitField('', id='first')
-    submit2 = SubmitField('', id='second')
-    submit3 = SubmitField('', id='third')
-    submit4 = SubmitField('', id='forth')
 
 
 @app.route('/analytics', methods=['GET', 'POST'])
@@ -421,6 +326,11 @@ def export_csv_web():
 @app.errorhandler(404)
 def web404(error):
     return render_template('404.html')
+
+
+@app.errorhandler(500)
+def web500(error):
+    return render_template('500.html')
 
 
 if __name__ == '__main__':
