@@ -4,9 +4,9 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, Email
 from wtforms.validators import DataRequired
 from flask import Flask, url_for, render_template, redirect, make_response, request
 
-from csv_xlsx import *
-from charts import charts
-from sql import *
+from app.logics.csv_xlsx import *
+from app.logics.charts import charts
+from app.logics.sql import *
 
 import json
 
