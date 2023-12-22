@@ -223,6 +223,7 @@ def get_category_name(id_category):
 
 
 def get_deposit_category_name(id_deposit_category):
+    print(id_deposit_category)
     return DepositCategories.query.filter_by(id_deposit_category=id_deposit_category).first().name
 
 

@@ -70,5 +70,21 @@
         "name_category": "\u041f\u043e\u0435\u0437\u0434\u043a\u0438",
         "number": 8,
         "sum": 17000
+    },
+    {
+        "comment": "",
+        "date": "01.01.2023",
+        "name_bank_account": "\u041a\u0430\u0440\u0442\u0430",
+        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
+        "number": 9,
+        "sum": 1300
+    },
+    {
+        "comment": "",
+        "date": "01.01.2023",
+        "name_bank_account": "\u041a\u0430\u0440\u0442\u0430",
+        "name_category": "\u0410\u0432\u0442\u043e\u043c\u043e\u0431\u0438\u043b\u044c",
+        "number": 10,
+        "sum": 2500
     }
 ]

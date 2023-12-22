@@ -12,4 +12,6 @@ from app import models
 
 migrate = Migrate(app, db)
 
+var = [True]
+
 from app import routes

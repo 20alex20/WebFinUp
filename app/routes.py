@@ -8,6 +8,9 @@ from app.logics.charts import charts
 from app.forms import *
 
 
+directory_name = ['app']
+
+
 class Alert:
     alert = ""
 
@@ -21,6 +24,9 @@ class Alert:
 
     def put(self, s):
         self.alert = s
+
+
+alert = Alert()
 
 
 def am_i_not_login():
@@ -38,9 +44,6 @@ def generate_params(title, **kwargs):
     for keys, value in kwargs.items():
         params[keys] = value
     return params
-
-
-alert = Alert()
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -116,7 +119,7 @@ def index():
             "date": i[3]
         }
         data.append(d)
-    with open('app' + url_for('static', filename='tables/data.json'), 'w+') as file:
+    with open(directory_name[0] + url_for('static', filename='tables/data.json'), 'w+') as file:
         json.dump(data, file, sort_keys=True, indent=4)
 
     summa = get_sum()
@@ -186,7 +189,7 @@ def bank_accounts():
             "description": i.description
         }
         data.append(d)
-    with open('app' + url_for('static', filename='tables/data1.json'), 'w+') as file:
+    with open(directory_name[0] + url_for('static', filename='tables/data1.json'), 'w+') as file:
         json.dump(data, file, indent=4)
 
     params = generate_params("Счета")
@@ -213,7 +216,7 @@ def categories():
             "description": i.description
         }
         data.append(d)
-    with open('app' + url_for('static', filename='tables/data2.json'), 'w+') as file:
+    with open(directory_name[0] + url_for('static', filename='tables/data2.json'), 'w+') as file:
         json.dump(data, file, indent=4)
 
     params = generate_params("Категории")
@@ -331,7 +334,3 @@ def web404(error):
 @app.errorhandler(500)
 def web500(error):
     return render_template('500.html')
-
-
-if __name__ == '__main__':
-    app.run(port=8080, host='0.0.0.0')
