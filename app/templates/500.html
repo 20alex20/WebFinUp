@@ -4,16 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ошибка 404 - Страница не найдена</title>
+    <title>400</title>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/404.css') }}">
 </head>
 
 <body>
     <section class="error-404-section section-padding">
         <div class="error-message">
-            <h3>Упс! Вы ввели данные в неверном формате!</h3>
-            <p>К сожалению мы не можем выполнить запрос из-за некорректных введенных данных.</p>
-            <a href="javascript:history.go(-1)" class="theme-btn">Вернуться назад</a>
+            <h3>{{ to_lang("Упс! Вы ввели данные в неверном формате!") }}</h3>
+            <p>{{ to_lang("К сожалению мы не можем выполнить запрос из-за некорректных введенных данных.") }}</p>
+            <a href="javascript:history.go(-1)" class="theme-btn">{{ to_lang("Вернуться назад") }}</a>
         </div>
     </section>
 </body>

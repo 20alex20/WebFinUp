@@ -22,14 +22,14 @@
 
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Категории доходов и расходов</div>
+            <div class="panel-heading">{{ to_lang("Категории доходов и расходов") }}</div>
             <div class="panel-body">
                 <table data-toggle="table" data-url="static/tables/data2.json" data-sort-name="of" data-sort-order="asc">
                     <thead>
                     <tr>
-                        <th data-field="name" data-sortable="true">Название</th>
-                        <th data-field="of" data-sortable="true">Тип</th>
-                        <th data-field="description" data-sortable="true">Описание</th>
+                        <th data-field="name" data-sortable="true">{{ to_lang("Название") }}</th>
+                        <th data-field="of" data-sortable="true">{{ to_lang("Тип") }}</th>
+                        <th data-field="description" data-sortable="true">{{ to_lang("Описание") }}</th>
                     </tr>
                     </thead>
                 </table>

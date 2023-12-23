@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-sm-9 col-lg-7 widget-right">
                         <div class="large">{{ summa }}</div>
-                        <div class="text-muted">Общая сумма</div>
+                        <div class="text-muted">{{ to_lang("Общая сумма") }}</div>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-sm-9 col-lg-7 widget-right">
                         <div class="large">{{ income }}</div>
-                        <div class="text-muted">Доходы за месяц</div>
+                        <div class="text-muted">{{ to_lang("Доходы за месяц") }}</div>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-sm-9 col-lg-7 widget-right">
                         <div class="large">{{ expense }}</div>
-                        <div class="text-muted">Расходы за месяц</div>
+                        <div class="text-muted">{{ to_lang("Расходы за месяц") }}</div>
                     </div>
                 </div>
             </div>
@@ -87,11 +87,11 @@
                         <thead>
                         <tr>
                             <!--						        <th data-field="state" data-checkbox="true" >ID</th>-->
-                            <th data-field="name_category" data-sortable="true">Название категории</th>
-                            <th data-field="name_bank_account" data-sortable="true">Название счёта</th>
-                            <th data-field="date" data-sortable="false">Дата</th>
-                            <th data-field="sum" data-sortable="true">Сумма</th>
-                            <th data-field="comment" data-sortable="true">Комментарий</th>
+                            <th data-field="name_category" data-sortable="true">{{ to_lang("Название категории") }}</th>
+                            <th data-field="name_bank_account" data-sortable="true">{{ to_lang("Название счета") }}</th>
+                            <th data-field="date" data-sortable="false">{{ to_lang("Дата") }}</th>
+                            <th data-field="sum" data-sortable="true">{{ to_lang("Сумма") }}</th>
+                            <th data-field="comment" data-sortable="true">{{ to_lang("Комментарий") }}</th>
                         </tr>
                         </thead>
                     </table>

@@ -44,7 +44,7 @@
                             <svg class="glyph stroked cancel">
                                 <use xlink:href="#stroked-cancel"></use>
                             </svg>
-                            Выход</a></li>
+                            {{ to_lang("Выход") }}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -55,57 +55,57 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <ul class="nav menu">
         <li role="presentation" class="divider"></li>
-        <li><a href="/">
+        <li><a href="/{{ to_lang('') }}">
             <svg class="glyph stroked dashboard-dial">
                 <use xlink:href="#stroked-dashboard-dial"></use>
             </svg>
-            Панель управления</a></li>
-        <li><a href="/analytics">
+            {{ to_lang("Панель управления") }}</a></li>
+        <li><a href="/analytics{{ to_lang('') }}">
             <svg class="glyph stroked line-graph">
                 <use xlink:href="#stroked-line-graph"></use>
             </svg>
-            Аналитика</a></li>
-        <li><a href="/bank_accounts">
+            {{ to_lang("Аналитика") }}</a></li>
+        <li><a href="/bank_accounts{{ to_lang('') }}">
             <svg class="glyph stroked clipboard with paper">
                 <use xlink:href="#stroked-clipboard-with-paper"/>
             </svg>
-            Счета</a></li>
-        <li><a href="/categories">
+            {{ to_lang("Счета") }}</a></li>
+        <li><a href="/categories{{ to_lang('') }}">
             <svg class="glyph stroked clipboard with paper">
                 <use xlink:href="#stroked-clipboard-with-paper"/>
             </svg>
-            Категории</a></li>
+            {{ to_lang("Категории") }}</a></li>
         <li class="parent ">
             <a href="#">
                 <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use
-                        xlink:href="#stroked-chevron-down"></use></svg>Добавить/Изменить</span>
+                        xlink:href="#stroked-chevron-down"></use></svg>{{ to_lang("Добавить/Изменить") }}</span>
             </a>
             <ul class="children collapse in" id="sub-item-1">
-                <li><a href="/income">
+                <li><a href="/income{{ to_lang('') }}">
                     <svg class="glyph stroked chevron-right">
                             <use xlink:href="#stroked-chevron-right"></use>
                         </svg>
-                    Доход</a></li>
-                <li><a href="/expense">
+                    {{ to_lang("Доход") }}</a></li>
+                <li><a href="/expense{{ to_lang('') }}">
                     <svg class="glyph stroked chevron-right">
                             <use xlink:href="#stroked-chevron-right"></use>
                         </svg>
-                    Расход</a></li>
-                <li><a href="/bank_account">
+                    {{ to_lang("Расход") }}</a></li>
+                <li><a href="/bank_account{{ to_lang('') }}">
                     <svg class="glyph stroked chevron-right">
                             <use xlink:href="#stroked-chevron-right"></use>
                         </svg>
-                    Счет</a></li>
-                <li><a href="/income_category">
+                    {{ to_lang("Счет") }}</a></li>
+                <li><a href="/income_category{{ to_lang('') }}">
                     <svg class="glyph stroked chevron-right">
                             <use xlink:href="#stroked-chevron-right"></use>
                         </svg>
-                    Категорию доходов</a></li>
-                <li><a href="/expenses_category">
+                    {{ to_lang("Категорию доходов") }}</a></li>
+                <li><a href="/expenses_category{{ to_lang('') }}">
                     <svg class="glyph stroked chevron-right">
                             <use xlink:href="#stroked-chevron-right"></use>
                         </svg>
-                    Категорию расходов</a></li>
+                    {{ to_lang("Категорию расходов") }}</a></li>
             </ul>
         </li>
         <li role="presentation" class="divider"></li>
@@ -113,12 +113,12 @@
             <svg class="glyph stroked download">
                 <use xlink:href="#stroked-download"/>
             </svg>
-            Экспорт данных в xlsx</a></li>
+            {{ to_lang("Экспорт данных в xlsx") }}</a></li>
         <li><a href="/export_csv">
             <svg class="glyph stroked download">
                 <use xlink:href="#stroked-download"/>
             </svg>
-            Экспорт данных в csv (zip)</a></li>
+            {{ to_lang("Экспорт данных в csv (zip)") }}</a></li>
     </ul>
 
 </div><!--/.sidebar-->
