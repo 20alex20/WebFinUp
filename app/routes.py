@@ -164,7 +164,8 @@ def income():
         alert.put(
             add_deposit(category, bank_account, form.sum.data, form.date.data.strftime("%d.%m.%Y"),
                         form.comment.data))
-        if alert.read() == to_lang("Данные изменены"):
+        if alert.read() == "Данные изменены":
+            alert.put(to_lang("Данные изменены"))
             return redirect('/' + to_lang(''))
     params = generate_params(to_lang("Добавить"), name=to_lang("Доход"), form=form)
     return render_template('purchase.html', **params)
@@ -247,7 +248,7 @@ def income_category():
 
     form = IncomeCategory()
     if form.validate_on_submit():
-        if form.categories.data == to_lang('Новая категория'):
+        if form.categories.data == 'Новая категория':
             alert.put(add_deposit_category(form.name.data, form.comment.data))
         else:
             category = 0
@@ -269,7 +270,7 @@ def expenses_category():
 
     form = ExpensesCategory()
     if form.validate_on_submit():
-        if form.categories.data == to_lang('Новая категория'):
+        if form.categories.data == 'Новая категория':
             alert.put(add_category(form.name.data, form.comment.data))
         else:
             category = 0
@@ -277,7 +278,7 @@ def expenses_category():
                 if i[1] == form.categories.data:
                     category = i[0]
             alert.put(edit_category(category, form.name.data, form.comment.data))
-        if alert.read() == to_lang("Данные изменены"):
+        if alert.read() == "Данные изменены":
             alert.put(to_lang("Данные изменены"))
             return redirect('/' + to_lang(''))
     params = generate_params(to_lang("Добавить"), name=to_lang("Расход"), form=form)
@@ -291,7 +292,7 @@ def bank_account():
 
     form = BankAccounts()
     if form.validate_on_submit():
-        if form.bank_accounts.data == to_lang('Новый счет'):
+        if form.bank_accounts.data == 'Новый счет':
             alert.put(add_bank_account(form.name.data, form.sum.data, form.comment.data))
         else:
             bank_account = 0
@@ -299,7 +300,7 @@ def bank_account():
                 if i[1] == form.bank_accounts.data:
                     bank_account = i[0]
             alert.put(edit_bank_account(bank_account, form.name.data, form.sum.data, form.comment.data))
-        if alert.read() == to_lang("Данные изменены"):
+        if alert.read() == "Данные изменены":
             alert.put(to_lang("Данные изменены"))
             return redirect('/' + to_lang(''))
     params = generate_params(to_lang("Добавить"), form=form)

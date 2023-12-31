@@ -10,7 +10,7 @@ class TestCase(unittest.TestCase):
 
     def test_all(self):
         with app.app_context():
-            obj = register("smit1@gmail.com", "smit", "Mr. Smit")
+            obj = register("smit2@gmail.com", "smit", "Mr. Smit")
             assert obj[2] == "Mr. Smit"
 
             res = add_bank_account("Карта", 5000)

@@ -164,8 +164,8 @@ def add_purchase(id_category, id_bank_account, sum, date, comment):
 
 
 def get_purchase():
-    return Purchases.query.outerjoin(Categories, Categories.id_category == Purchases.id_category
-                                     and Categories.id_user == get_id_user())
+    return Purchases.query.join(Categories, Categories.id_category ==
+                                Purchases.id_category).filter(Categories.id_user == get_id_user())
 
 
 def add_deposit(id_deposit_category, id_bank_account, sum, date, comment):
@@ -179,9 +179,9 @@ def add_deposit(id_deposit_category, id_bank_account, sum, date, comment):
 
 
 def get_deposits():
-    return Deposits.query.outerjoin(DepositCategories, DepositCategories.id_deposit_category ==
-                                    Deposits.id_deposit_category and
-                                    DepositCategories.id_user == get_id_user())
+    return Deposits.query.join(DepositCategories, DepositCategories.id_deposit_category ==
+                               Deposits.id_deposit_category).filter(
+        DepositCategories.id_user == get_id_user())
 
 
 def get_purchase_deposit(type, elem):
