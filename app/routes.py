@@ -342,7 +342,7 @@ def export_xlsx_web():
 @app.route('/export_csv')
 def export_csv_web():
     if am_i_not_login():
-        return redirect('/login + to_lang('')')
+        return redirect('/login' + to_lang(''))
     export_csv()
     return redirect(url_for('static', filename='export/export_data_FinUp.zip'))
 

@@ -1,82 +1,18 @@
 [
     {
-        "comment": "\u0428\u0443\u0431\u0430",
-        "date": "23.12.2023",
-        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u041f\u043e\u0434\u0430\u0440\u043a\u0438",
-        "number": 0,
-        "sum": 12000
-    },
-    {
         "comment": "",
-        "date": "22.12.2023",
+        "date": "01.03.2024",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u041d\u0430\u0441\u0442\u043e\u043b\u043a\u0438",
-        "number": 1,
-        "sum": 400
-    },
-    {
-        "comment": "\u0428\u0443\u0431\u0430",
-        "date": "21.12.2023",
-        "name_bank_account": "\u041a\u0430\u0440\u0442\u0430",
-        "name_category": "\u041e\u0434\u0435\u0436\u0434\u0430",
-        "number": 2,
+        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
+        "number": 0,
         "sum": 10000
     },
     {
         "comment": "",
-        "date": "17.12.2023",
+        "date": "29.02.2024",
         "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
         "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
-        "number": 3,
+        "number": 1,
         "sum": 12000
-    },
-    {
-        "comment": "",
-        "date": "17.12.2023",
-        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
-        "number": 4,
-        "sum": 12000
-    },
-    {
-        "comment": "",
-        "date": "16.12.2023",
-        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u0410\u0440\u0435\u043d\u0434\u0430",
-        "number": 5,
-        "sum": 23443
-    },
-    {
-        "comment": "",
-        "date": "15.12.2023",
-        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
-        "number": 6,
-        "sum": 230
-    },
-    {
-        "comment": "",
-        "date": "14.12.2023",
-        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u0420\u043e\u0434\u0441\u0442\u0432\u0435\u043d\u043d\u0438\u043a\u0438",
-        "number": 7,
-        "sum": 4535
-    },
-    {
-        "comment": "",
-        "date": "12.12.2023",
-        "name_bank_account": "\u041a\u0430\u0440\u0442\u0430",
-        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
-        "number": 8,
-        "sum": 2300
-    },
-    {
-        "comment": "",
-        "date": "02.12.2023",
-        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
-        "name_category": "\u041f\u043e\u0435\u0437\u0434\u043a\u0438",
-        "number": 9,
-        "sum": 17000
     }
 ]
