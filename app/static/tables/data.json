@@ -1,0 +1,18 @@
+[
+    {
+        "comment": "",
+        "date": "01.03.2024",
+        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
+        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
+        "number": 0,
+        "sum": 10000
+    },
+    {
+        "comment": "",
+        "date": "29.02.2024",
+        "name_bank_account": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u0435",
+        "name_category": "\u0417\u0430\u0440\u043f\u043b\u0430\u0442\u0430",
+        "number": 1,
+        "sum": 12000
+    }
+]

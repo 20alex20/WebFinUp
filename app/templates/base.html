@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+
+    <link href="{{ url_for('static',filename='styles/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='styles/datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='styles/styles.css') }}" rel="stylesheet">
+
+    <!--Icons-->
+    <script src="{{ url_for('static',filename='scripts/lumino.glyphs.js') }}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="{{ url_for('static',filename='scripts/html5shiv.js') }}"></script>
+    <script src="{{ url_for('static',filename='scripts/respond.min.js') }}"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><span>Web</span>FinUp</a>
+            <ul class="user-menu">
+                <li class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <svg class="glyph stroked male-user">
+                            <use xlink:href="#stroked-male-user"></use>
+                        </svg>
+                        {{ username }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/logout">
+                            <svg class="glyph stroked cancel">
+                                <use xlink:href="#stroked-cancel"></use>
+                            </svg>
+                            {{ to_lang("Выход") }}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</nav>
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <ul class="nav menu">
+        <li role="presentation" class="divider"></li>
+        <li><a href="/{{ to_lang('') }}">
+            <svg class="glyph stroked dashboard-dial">
+                <use xlink:href="#stroked-dashboard-dial"></use>
+            </svg>
+            {{ to_lang("Панель управления") }}</a></li>
+        <li><a href="/analytics{{ to_lang('') }}">
+            <svg class="glyph stroked line-graph">
+                <use xlink:href="#stroked-line-graph"></use>
+            </svg>
+            {{ to_lang("Аналитика") }}</a></li>
+        <li><a href="/bank_accounts{{ to_lang('') }}">
+            <svg class="glyph stroked clipboard with paper">
+                <use xlink:href="#stroked-clipboard-with-paper"/>
+            </svg>
+            {{ to_lang("Счета") }}</a></li>
+        <li><a href="/categories{{ to_lang('') }}">
+            <svg class="glyph stroked clipboard with paper">
+                <use xlink:href="#stroked-clipboard-with-paper"/>
+            </svg>
+            {{ to_lang("Категории") }}</a></li>
+        <li class="parent ">
+            <a href="#">
+                <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use
+                        xlink:href="#stroked-chevron-down"></use></svg>{{ to_lang("Добавить/Изменить") }}</span>
+            </a>
+            <ul class="children collapse in" id="sub-item-1">
+                <li><a href="/income{{ to_lang('') }}">
+                    <svg class="glyph stroked chevron-right">
+                            <use xlink:href="#stroked-chevron-right"></use>
+                        </svg>
+                    {{ to_lang("Доход") }}</a></li>
+                <li><a href="/expense{{ to_lang('') }}">
+                    <svg class="glyph stroked chevron-right">
+                            <use xlink:href="#stroked-chevron-right"></use>
+                        </svg>
+                    {{ to_lang("Расход") }}</a></li>
+                <li><a href="/bank_account{{ to_lang('') }}">
+                    <svg class="glyph stroked chevron-right">
+                            <use xlink:href="#stroked-chevron-right"></use>
+                        </svg>
+                    {{ to_lang("Счет") }}</a></li>
+                <li><a href="/income_category{{ to_lang('') }}">
+                    <svg class="glyph stroked chevron-right">
+                            <use xlink:href="#stroked-chevron-right"></use>
+                        </svg>
+                    {{ to_lang("Категорию доходов") }}</a></li>
+                <li><a href="/expenses_category{{ to_lang('') }}">
+                    <svg class="glyph stroked chevron-right">
+                            <use xlink:href="#stroked-chevron-right"></use>
+                        </svg>
+                    {{ to_lang("Категорию расходов") }}</a></li>
+            </ul>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <li><a href="/export_xlsx" download>
+            <svg class="glyph stroked download">
+                <use xlink:href="#stroked-download"/>
+            </svg>
+            {{ to_lang("Экспорт данных в xlsx") }}</a></li>
+        <li><a href="/export_csv">
+            <svg class="glyph stroked download">
+                <use xlink:href="#stroked-download"/>
+            </svg>
+            {{ to_lang("Экспорт данных в csv (zip)") }}</a></li>
+    </ul>
+
+</div><!--/.sidebar-->
+<script src="{{ url_for('static',filename='scripts/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename='scripts/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename='scripts/chart.min.js') }}"></script>
+<script src="{{ url_for('static',filename='scripts/chart-data.js') }}"></script>
+<script src="{{ url_for('static',filename='scripts/easypiechart.js') }}"></script>
+<script src="{{ url_for('static',filename='scripts/easypiechart-data.js') }}"></script>
+<script src="{{ url_for('static',filename='scripts/bootstrap-datepicker.js') }}"></script>
+{% block content %}{% endblock %}
+<script>
+    function sayHi() {
+        s = "{{ alert }}";
+            if (s != "") {
+            alert(s);
+        }
+    }
+    setTimeout(sayHi, 500);
+
+</script>
+</body>
+</html>
