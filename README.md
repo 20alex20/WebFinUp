@@ -5,14 +5,23 @@
 ## Основные страницы и их функционал
 
 * Главный экран с историей операций
+
 ![img.png](README/img.png)
+
 * Аутентификация
+
 ![img_1.png](README/img_1.png)
 ![img_2.png](README/img_2.png)
+
 * Добавление дохода/расхода
+
 ![img_3.png](README/img_3.png)
+
 * Построение графиков и пример построенного графика
+
 ![img_5.png](README/img_5.png)
 ![img_4.png](README/img_4.png)
+
 * Экспорт данных
+
 ![img_6.png](README/img_6.png)
